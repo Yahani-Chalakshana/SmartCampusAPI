@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Location: src/main/java/com/smartcampus/app/SmartCampusApplication.java
 package com.smartcampus.app;
 
-/**
- *
- * @author Yahani
- */
-public class SmartCampusApplication {
-    
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.smartcampus.resource.DiscoveryResource;
+import com.smartcampus.resource.RoomResource;
+
+@ApplicationPath("/api/v1")
+public class SmartCampusApplication extends Application {
+
+    @Override
+    public Set<Class<?>> getClasses() {
+        Set<Class<?>> classes = new HashSet<>();
+        // Resources
+        classes.add(DiscoveryResource.class);
+        classes.add(RoomResource.class);
+        return classes;
+    }
 }
