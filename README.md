@@ -1,9 +1,9 @@
 # Smart Campus Sensor & Room Management API
 
 **Student:** Yahani Chalakshana Dissanayake  
-**Student ID:** w2149629  
+**Student ID:** w2149629 / 20240101
 **Module:** 5COSC022C.2 - Client-Server Architectures  
-**University:** University of Westminster  
+**University:** Informatics Institute of Technology, affiliated with the University of Westminster  
 
 ---
 
@@ -48,7 +48,7 @@ The main things the API can do:
    ```bash
    git clone https://github.com/Yahani-Chalakshana/SmartCampusAPI.git
    ```
-2. Open NetBeans and go to **File → Open Project**, then select the SmartCampusAPI folder
+2. Open NetBeans and go to **File - Open Project**, then select the SmartCampusAPI folder
 3. Make sure Tomcat 9 is added as the server (Tools - Servers - Add Server if not already there)
 4. Right-click the project - **Clean and Build** - wait for BUILD SUCCESS
 5. Right-click the project - **Run**
@@ -71,7 +71,7 @@ All endpoints are under the base URL: `http://localhost:8080/SmartCampusAPI/api/
 
 | Method | Endpoint | What it does |
 |---|---|---|
-| GET | `/` | Discovery — returns API info and links |
+| GET | `/` | Discovery - returns API info and links |
 | GET | `/rooms` | Get all rooms |
 | POST | `/rooms` | Create a new room |
 | GET | `/rooms/{roomId}` | Get a specific room |
@@ -222,7 +222,7 @@ curl -i http://localhost:8080/SmartCampusAPI/api/v1/rooms/LIB-301
 
 ## Error Handling
 
-I implemented custom exception mappers for all the error scenarios in the coursework. The API never returns a raw Java stack trace — all errors return a JSON body with a clear message.
+I implemented custom exception mappers for all the error scenarios in the coursework. The API never returns a raw Java stack trace - all errors return a JSON body with a clear message.
 
 | Situation | HTTP Status |
 |---|---|
@@ -233,7 +233,7 @@ I implemented custom exception mappers for all the error scenarios in the course
 
 ---
 
-## Report — Answers to Coursework Questions
+## Report - Answers to Coursework Questions
 
 ### Part 1.1 - JAX-RS Resource Lifecycle
 
@@ -249,7 +249,7 @@ Since Tomcat handles multiple requests at the same time on different threads, I 
 
 HATEOAS means the API includes links in its responses so clients can navigate without needing to know all the URLs in advance. This is useful because clients can just start at the discovery endpoint and follow links to find rooms, sensors, and other resources, rather than relying on external documentation that might be out of date.
 
-In my API, `GET /api/v1` returns links to `/api/v1/rooms` and `/api/v1/sensors`. This means a developer integrating with the API does not need to guess or hardcode those paths — the server tells them. Compared to static documentation, this approach ensures the API itself is always the accurate source of truth.
+In my API, `GET /api/v1` returns links to `/api/v1/rooms` and `/api/v1/sensors`. This means a developer integrating with the API does not need to guess or hardcode those paths - the server tells them. Compared to static documentation, this approach ensures the API itself is always the accurate source of truth.
 
 ---
 
@@ -271,7 +271,7 @@ If you send `DELETE /rooms/LIB-301` and the room exists with no sensors, it gets
 
 ### Part 3.1 - @Consumes and Content-Type Mismatch
 
-The `@Consumes(MediaType.APPLICATION_JSON)` annotation tells JAX-RS that the method will only accept requests with a `Content-Type: application/json` header. If a client sends `text/plain` or `application/xml` instead, JAX-RS rejects the request before it even reaches my method and returns a `415 Unsupported Media Type` response automatically. This means I do not need to write any extra validation code myself — the framework handles it.
+The `@Consumes(MediaType.APPLICATION_JSON)` annotation tells JAX-RS that the method will only accept requests with a `Content-Type: application/json` header. If a client sends `text/plain` or `application/xml` instead, JAX-RS rejects the request before it even reaches my method and returns a `415 Unsupported Media Type` response automatically. This means I do not need to write any extra validation code myself - the framework handles it.
 
 ---
 
@@ -287,13 +287,13 @@ If the type was in the path, it would imply that `CO2` is a sub-resource of `typ
 
 Instead of putting all the readings logic directly inside `SensorResource`, I used a sub-resource locator to delegate requests to `/sensors/{id}/readings` to a separate `SensorReadingResource` class. The locator method just returns a new instance of that class, and JAX-RS handles the rest.
 
-This keeps the code cleaner and easier to maintain. Each class has one job — `SensorResource` handles sensors, `SensorReadingResource` handles readings. If I need to change something about how readings work, I only touch one class. If everything was in one big controller class, it would get very messy and hard to read as the API grows.
+This keeps the code cleaner and easier to maintain. Each class has one job - `SensorResource` handles sensors, `SensorReadingResource` handles readings. If I need to change something about how readings work, I only touch one class. If everything was in one big controller class, it would get very messy and hard to read as the API grows.
 
 ---
 
 ### Part 5.2 — 422 vs 404
 
-When a client tries to register a sensor with a `roomId` that does not exist, the URL they are calling (`/api/v1/sensors`) is valid and works fine. So returning 404 would be confusing because nothing about the URL is missing — the problem is inside the request body.
+When a client tries to register a sensor with a `roomId` that does not exist, the URL they are calling (`/api/v1/sensors`) is valid and works fine. So returning 404 would be confusing because nothing about the URL is missing - the problem is inside the request body.
 
 422 Unprocessable Entity is more accurate here because it means "I understood your request and the format is fine, but the data inside it has a logic problem." In this case, the roomId they referenced does not exist. It makes it much clearer to the developer what went wrong.
 
@@ -309,7 +309,7 @@ In my API the `GlobalExceptionMapper` catches any unexpected errors and just ret
 
 ### Part 5.5 - Filters vs Manual Logging
 
-If I added a `Logger.info()` line inside every single resource method, I would end up with the same logging code repeated dozens of times. That is hard to maintain — if I want to change the log format I have to update every method.
+If I added a `Logger.info()` line inside every single resource method, I would end up with the same logging code repeated dozens of times. That is hard to maintain - if I want to change the log format I have to update every method.
 
 Using a JAX-RS filter means the logging code is written once in `LoggingFilter.java` and it automatically runs for every request and every response. It is cleaner, more consistent, and much easier to change later. It also keeps the resource methods focused on their actual job rather than mixing in logging code.
 
