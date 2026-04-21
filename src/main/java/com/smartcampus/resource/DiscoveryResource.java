@@ -1,4 +1,3 @@
-// Location: src/main/java/com/smartcampus/resource/DiscoveryResource.java
 package com.smartcampus.resource;
 
 import javax.ws.rs.*;
@@ -13,14 +12,19 @@ public class DiscoveryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response discover() {
         Map<String, Object> info = new HashMap<>();
-        info.put("api", "Smart Campus Sensor & Room Management API");
-        info.put("version", "1.0");
-        info.put("contact", "admin@smartcampus.ac.uk");
+        info.put("name", "Smart Campus Sensor & Room Management API");
+        info.put("version", "v1");
 
-        Map<String, String> links = new HashMap<>();
-        links.put("rooms", "/api/v1/rooms");
-        links.put("sensors", "/api/v1/sensors");
-        info.put("resources", links);
+        Map<String, String> contact = new HashMap<>();
+        contact.put("owner", "Smart Campus Yahani");
+        contact.put("email", "w2149629@westminster.ac.uk");
+        info.put("contact", contact);
+
+        Map<String, String> resources = new HashMap<>();
+        resources.put("self", "/api/v1");
+        resources.put("rooms", "/api/v1/rooms");
+        resources.put("sensors", "/api/v1/sensors");
+        info.put("resources", resources);
 
         return Response.ok(info).build();
     }
