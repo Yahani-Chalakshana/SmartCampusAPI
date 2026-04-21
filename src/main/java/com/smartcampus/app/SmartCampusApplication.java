@@ -8,6 +8,9 @@ import java.util.Set;
 
 import com.smartcampus.resource.DiscoveryResource;
 import com.smartcampus.resource.RoomResource;
+import com.smartcampus.resource.SensorResource;
+import com.smartcampus.exception.mapper.*;
+import com.smartcampus.filter.LoggingFilter;
 
 @ApplicationPath("/api/v1")
 public class SmartCampusApplication extends Application {
@@ -18,6 +21,14 @@ public class SmartCampusApplication extends Application {
         // Resources
         classes.add(DiscoveryResource.class);
         classes.add(RoomResource.class);
+        classes.add(SensorResource.class);
+        // Exception mappers
+        classes.add(RoomNotEmptyExceptionMapper.class);
+        classes.add(LinkedResourceNotFoundExceptionMapper.class);
+        classes.add(SensorUnavailableExceptionMapper.class);
+        classes.add(GlobalExceptionMapper.class);
+        // Filter
+        classes.add(LoggingFilter.class);
         return classes;
     }
 }
