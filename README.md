@@ -1,7 +1,7 @@
 # Smart Campus Sensor & Room Management API
 
 **Student:** Yahani Chalakshana Dissanayake  
-**Student ID:** w2149629 / 20240101
+**Student ID:** w2149629 / 20240101  
 **Module:** 5COSC022C.2 - Client-Server Architectures  
 **University:** Informatics Institute of Technology, affiliated with the University of Westminster  
 
@@ -265,7 +265,7 @@ Returning full room objects means the response is bigger, but the client gets ev
 
 Yes, DELETE is idempotent in my implementation. Idempotent means calling the same request multiple times ends up with the same result on the server.
 
-If you send `DELETE /rooms/LIB-301` and the room exists with no sensors, it gets deleted and you get 200 OK. If you send the exact same request again, the room is already gone so you get 404 Not Found. The response code is different, but the server state is the same both times — the room does not exist. So the operation is idempotent.
+If you send `DELETE /rooms/LIB-301` and the room exists with no sensors, it gets deleted and you get 200 OK. If you send the exact same request again, the room is already gone so you get 404 Not Found. The response code is different, but the server state is the same both times - the room does not exist. So the operation is idempotent.
 
 ---
 
@@ -279,7 +279,7 @@ The `@Consumes(MediaType.APPLICATION_JSON)` annotation tells JAX-RS that the met
 
 Using `?type=CO2` as a query parameter is better than putting the type in the path like `/sensors/type/CO2` because query parameters are meant for optional filtering, not for identifying resources. The base resource `/api/v1/sensors` still makes sense with or without the filter applied.
 
-If the type was in the path, it would imply that `CO2` is a sub-resource of `type`, which is not true — it is just a filter condition. Query parameters are also much easier to extend. For example, you could easily add `?type=CO2&status=ACTIVE` without changing the endpoint structure at all.
+If the type was in the path, it would imply that `CO2` is a sub-resource of `type`, which is not true - it is just a filter condition. Query parameters are also much easier to extend. For example, you could easily add `?type=CO2&status=ACTIVE` without changing the endpoint structure at all.
 
 ---
 
@@ -291,7 +291,7 @@ This keeps the code cleaner and easier to maintain. Each class has one job - `Se
 
 ---
 
-### Part 5.2 — 422 vs 404
+### Part 5.2 - 422 vs 404
 
 When a client tries to register a sensor with a `roomId` that does not exist, the URL they are calling (`/api/v1/sensors`) is valid and works fine. So returning 404 would be confusing because nothing about the URL is missing - the problem is inside the request body.
 
