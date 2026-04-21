@@ -19,8 +19,10 @@ import java.util.concurrent.ConcurrentHashMap;
 // Singleton class acting as an in-memory database for the application
 public class DataStore {
 
+    // Eager initialization of the single DataStore instance
     private static final DataStore INSTANCE = new DataStore();
 
+    // Thread-safe maps to store rooms, sensors, and their readings
     private final Map<String, Room> rooms = new ConcurrentHashMap<>();
     private final Map<String, Sensor> sensors = new ConcurrentHashMap<>();
     private final Map<String, List<SensorReading>> readings = new ConcurrentHashMap<>();
