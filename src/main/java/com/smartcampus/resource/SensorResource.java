@@ -1,5 +1,13 @@
-// Location: src/main/java/com/smartcampus/resource/SensorResource.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.smartcampus.resource;
+
+/**
+ *
+ * @author Yahani
+ */
 
 import com.smartcampus.exception.LinkedResourceNotFoundException;
 import com.smartcampus.model.Sensor;
@@ -10,6 +18,7 @@ import javax.ws.rs.core.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// Main entry point for sensor-related operations
 @Path("/sensors")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,6 +26,7 @@ public class SensorResource {
 
     private final DataStore store = DataStore.getInstance();
 
+    // Get all sensors, with optional filtering by type
     @GET
     public Response getSensors(@QueryParam("type") String type) {
         List<Sensor> list = new ArrayList<>(store.getSensors().values());
@@ -28,6 +38,7 @@ public class SensorResource {
         return Response.ok(list).build();
     }
 
+    // Register a new sensor and link it to an existing room
     @POST
     public Response createSensor(Sensor sensor) {
         if (sensor.getId() == null || sensor.getId().isEmpty()) {
@@ -47,6 +58,7 @@ public class SensorResource {
         return Response.status(Response.Status.CREATED).entity(sensor).build();
     }
 
+    // Fetch a single sensor by its unique ID
     @GET
     @Path("/{sensorId}")
     public Response getSensor(@PathParam("sensorId") String sensorId) {

@@ -1,5 +1,13 @@
-// Location: src/main/java/com/smartcampus/resource/SensorReadingResource.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.smartcampus.resource;
+
+/**
+ *
+ * @author Yahani
+ */
 
 import com.smartcampus.exception.SensorUnavailableException;
 import com.smartcampus.model.Sensor;
@@ -10,10 +18,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.*;
 
+// Sub-resource class; no @Path here because it's managed by SensorResource
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SensorReadingResource {
 
+    // Constructor to receive the sensorId from the parent resource
     private final String sensorId;
     private final DataStore store = DataStore.getInstance();
 
@@ -21,6 +31,7 @@ public class SensorReadingResource {
         this.sensorId = sensorId;
     }
 
+    // Retrieve historical readings for this specific sensor
     @GET
     public Response getReadings() {
         Sensor sensor = store.getSensors().get(sensorId);
@@ -32,6 +43,7 @@ public class SensorReadingResource {
         return Response.ok(readings).build();
     }
 
+    // Add a new measurement data point
     @POST
     public Response addReading(SensorReading reading) {
         Sensor sensor = store.getSensors().get(sensorId);

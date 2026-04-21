@@ -7,15 +7,18 @@
 
     <servlet>
         <servlet-name>jersey</servlet-name>
+        <!-- The Jersey ServletContainer bridges the web server and your JAX-RS code -->
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.smartcampus.app.SmartCampusApplication</param-value>
         </init-param>
+        <!-- Load the servlet immediately on Tomcat startup -->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>jersey</servlet-name>
+        <!-- Base URI pattern for all API endpoints -->
         <url-pattern>/api/v1/*</url-pattern>
     </servlet-mapping>
 </web-app>

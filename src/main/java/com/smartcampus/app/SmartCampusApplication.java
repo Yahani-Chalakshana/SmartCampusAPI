@@ -1,5 +1,13 @@
-// Location: src/main/java/com/smartcampus/app/SmartCampusApplication.java
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.smartcampus.app;
+
+/**
+ *
+ * @author Yahani
+ */
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -12,6 +20,7 @@ import com.smartcampus.resource.SensorResource;
 import com.smartcampus.exception.mapper.*;
 import com.smartcampus.filter.LoggingFilter;
 
+// Set base URI path for all API endpoints
 @ApplicationPath("/api/v1")
 public class SmartCampusApplication extends Application {
 
