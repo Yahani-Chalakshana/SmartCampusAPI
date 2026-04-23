@@ -325,6 +325,12 @@ https://github.com/Yahani-Chalakshana/SmartCampusAPI
 
 ---
 
+## Demonstration Video
+
+https://youtu.be/z3pBvMWeuuU
+
+---
+
 ## Notes
 
 - Only JAX-RS was used - no Spring Boot
